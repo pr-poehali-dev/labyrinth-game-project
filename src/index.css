@@ -93,9 +93,34 @@
 @layer base {
   * {
     @apply border-border;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Press Start 2P", monospace;
   }
+}
+
+.pixel-font {
+  font-family: "Press Start 2P", monospace;
+  line-height: 1.6;
+}
+
+.pixel-border {
+  border-style: solid;
+  border-image-slice: 2;
+  border-image-width: 2;
+  border-image-outset: 0;
+  image-rendering: pixelated;
+}
+
+.retro-shadow {
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.retro-text-shadow {
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
 }

@@ -123,25 +123,50 @@ const GameScreen = ({ level, onLevelComplete, onTrapHit }: GameScreenProps) => {
   const cellSize = Math.min(60, Math.floor(Math.min(window.innerWidth, window.innerHeight) * 0.7 / Math.max(grid.length, grid[0].length)));
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 animate-fade-in">
-      <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-4 border-orange-400 p-6 md:p-8">
+    <div className="w-full h-full flex flex-col items-center justify-center p-4 animate-fade-in pixel-font" style={{
+      backgroundColor: '#1a1a2e',
+      backgroundImage: `
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 4px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 4px)
+      `,
+      backgroundSize: '8px 8px'
+    }}>
+      <Card className="retro-shadow" style={{
+        backgroundColor: '#0f3460',
+        border: '6px solid #16213e',
+        borderRadius: 0,
+        padding: '1.5rem'
+      }}>
         <div className="space-y-6">
-          <div className="flex justify-between items-center gap-8">
-            <div className="text-center">
-              <p className="text-lg text-gray-600" style={{ fontFamily: 'Rubik, sans-serif' }}>Уровень</p>
-              <p className="text-4xl font-black text-purple-600" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-                {level} / 3
+          <div className="flex justify-between items-center gap-8 mb-4">
+            <div className="text-center retro-shadow" style={{
+              backgroundColor: '#16213e',
+              border: '3px solid #0f3460',
+              padding: '0.75rem'
+            }}>
+              <p className="text-xs pixel-font" style={{ color: '#00d9ff', lineHeight: '1.8' }}>LVL</p>
+              <p className="text-2xl font-bold pixel-font" style={{ color: '#e94560', lineHeight: '1.8' }}>
+                {level}/3
               </p>
             </div>
-            <div className="text-center">
-              <p className="text-lg text-gray-600" style={{ fontFamily: 'Rubik, sans-serif' }}>Монетки</p>
-              <p className="text-4xl font-black text-orange-600" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-                🪙 {collectedCoins} / {levelData.coins}
+            <div className="text-center retro-shadow" style={{
+              backgroundColor: '#16213e',
+              border: '3px solid #0f3460',
+              padding: '0.75rem'
+            }}>
+              <p className="text-xs pixel-font" style={{ color: '#00d9ff', lineHeight: '1.8' }}>COINS</p>
+              <p className="text-2xl font-bold pixel-font" style={{ color: '#ffd700', lineHeight: '1.8' }}>
+                {collectedCoins}/{levelData.coins}
               </p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-200 to-green-200 p-4 rounded-xl border-4 border-blue-400 inline-block">
+          <div className="retro-shadow" style={{
+            backgroundColor: '#0a2463',
+            border: '4px solid #000000',
+            padding: '1rem',
+            borderRadius: 0
+          }}>
             <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${grid[0].length}, ${cellSize}px)` }}>
               {grid.map((row, y) =>
                 row.map((cell, x) => (
@@ -154,10 +179,13 @@ const GameScreen = ({ level, onLevelComplete, onTrapHit }: GameScreenProps) => {
                       width: cellSize,
                       height: cellSize,
                       backgroundColor:
-                        cell === 'wall' ? '#8B4513' :
-                        cell === 'exit' ? '#FFD700' :
+                        cell === 'wall' ? '#1e3a8a' :
+                        cell === 'exit' ? '#047857' :
+                        cell === 'empty' ? '#1e293b' :
                         'transparent',
-                      borderRadius: cell === 'wall' ? '4px' : '8px',
+                      border: cell === 'wall' ? '2px solid #000' : cell === 'exit' ? '2px solid #065f46' : '1px solid #334155',
+                      borderRadius: 0,
+                      imageRendering: 'pixelated'
                     }}
                   >
                     {getCellEmoji(cell)}
@@ -167,40 +195,64 @@ const GameScreen = ({ level, onLevelComplete, onTrapHit }: GameScreenProps) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto">
+          <div className="grid grid-cols-3 gap-2 max-w-xs mx-auto">
             <div></div>
             <Button
               onClick={() => movePlayer(0, -1)}
               size="lg"
-              className="bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-700"
+              className="retro-shadow pixel-font"
+              style={{
+                backgroundColor: '#e94560',
+                border: '3px solid #c93a50',
+                borderRadius: 0,
+                color: '#fff'
+              }}
             >
-              <Icon name="ArrowUp" size={24} />
+              <Icon name="ArrowUp" size={20} />
             </Button>
             <div></div>
             <Button
               onClick={() => movePlayer(-1, 0)}
               size="lg"
-              className="bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-700"
+              className="retro-shadow pixel-font"
+              style={{
+                backgroundColor: '#e94560',
+                border: '3px solid #c93a50',
+                borderRadius: 0,
+                color: '#fff'
+              }}
             >
-              <Icon name="ArrowLeft" size={24} />
+              <Icon name="ArrowLeft" size={20} />
             </Button>
-            <div className="flex items-center justify-center text-sm text-gray-600">
-              Стрелки
+            <div className="flex items-center justify-center text-xs pixel-font" style={{ color: '#00d9ff', lineHeight: '1.8' }}>
+              USE<br/>KEYS
             </div>
             <Button
               onClick={() => movePlayer(1, 0)}
               size="lg"
-              className="bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-700"
+              className="retro-shadow pixel-font"
+              style={{
+                backgroundColor: '#e94560',
+                border: '3px solid #c93a50',
+                borderRadius: 0,
+                color: '#fff'
+              }}
             >
-              <Icon name="ArrowRight" size={24} />
+              <Icon name="ArrowRight" size={20} />
             </Button>
             <div></div>
             <Button
               onClick={() => movePlayer(0, 1)}
               size="lg"
-              className="bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-700"
+              className="retro-shadow pixel-font"
+              style={{
+                backgroundColor: '#e94560',
+                border: '3px solid #c93a50',
+                borderRadius: 0,
+                color: '#fff'
+              }}
             >
-              <Icon name="ArrowDown" size={24} />
+              <Icon name="ArrowDown" size={20} />
             </Button>
             <div></div>
           </div>

@@ -7,23 +7,54 @@ interface SplashScreenProps {
 
 const SplashScreen = ({ onStart }: SplashScreenProps) => {
   return (
-    <div className="w-full h-full flex items-center justify-center p-4 animate-fade-in">
-      <Card className="max-w-2xl w-full bg-white/95 backdrop-blur-sm shadow-2xl border-4 border-purple-400 p-8 md:p-12 animate-scale-in">
+    <div className="w-full h-full flex items-center justify-center p-4 animate-fade-in" style={{
+      backgroundColor: '#1a1a2e',
+      backgroundImage: `
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 4px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 4px)
+      `,
+      backgroundSize: '8px 8px'
+    }}>
+      <Card className="max-w-2xl w-full retro-shadow pixel-font" style={{
+        backgroundColor: '#0f3460',
+        border: '6px solid #16213e',
+        borderRadius: 0,
+        padding: '2rem'
+      }}>
         <div className="text-center space-y-8">
           <div className="space-y-4">
-            <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 animate-pulse" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-              🌟 ЛАБИРИНТ 🌟
+            <h1 className="text-3xl md:text-5xl font-bold retro-text-shadow pixel-font animate-pulse" style={{ 
+              color: '#e94560',
+              lineHeight: '1.8'
+            }}>
+              ЛАБИРИНТ
             </h1>
-            <p className="text-xl md:text-2xl text-gray-700" style={{ fontFamily: 'Rubik, sans-serif' }}>
-              Собирай монетки, избегай ловушек!
+            <p className="text-sm md:text-base pixel-font" style={{ 
+              color: '#ffd700',
+              lineHeight: '1.8',
+              marginTop: '1rem'
+            }}>
+              Собирай монетки,<br/>избегай ловушек!
             </p>
           </div>
 
-          <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-6 space-y-4 border-2 border-purple-300">
-            <h2 className="text-2xl font-bold text-purple-800" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-              📋 Правила игры
+          <div className="retro-shadow" style={{
+            backgroundColor: '#16213e',
+            border: '4px solid #0f3460',
+            padding: '1.5rem',
+            borderRadius: 0
+          }}>
+            <h2 className="text-lg md:text-xl font-bold pixel-font" style={{ 
+              color: '#00d9ff',
+              lineHeight: '1.8',
+              marginBottom: '1rem'
+            }}>
+              ПРАВИЛА ИГРЫ
             </h2>
-            <ul className="text-left space-y-3 text-lg text-gray-700 max-w-md mx-auto" style={{ fontFamily: 'Rubik, sans-serif' }}>
+            <ul className="text-left space-y-3 text-xs md:text-sm max-w-md mx-auto pixel-font" style={{
+              color: '#ffffff',
+              lineHeight: '1.8'
+            }}>
               <li className="flex items-start gap-3">
                 <span className="text-2xl">🪙</span>
                 <span>Собери все монетки на уровне</span>
@@ -46,10 +77,16 @@ const SplashScreen = ({ onStart }: SplashScreenProps) => {
           <Button
             onClick={onStart}
             size="lg"
-            className="text-2xl md:text-3xl px-12 py-8 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-black rounded-full shadow-xl hover:scale-110 transition-transform border-4 border-green-300"
-            style={{ fontFamily: 'Fredoka, sans-serif' }}
+            className="text-base md:text-xl px-8 py-6 retro-shadow hover:scale-105 transition-transform pixel-font"
+            style={{ 
+              backgroundColor: '#e94560',
+              color: '#ffffff',
+              border: '4px solid #c93a50',
+              borderRadius: 0,
+              lineHeight: '1.8'
+            }}
           >
-            🎮 НАЧАТЬ ИГРУ 🎮
+            START GAME
           </Button>
         </div>
       </Card>
